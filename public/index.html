@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>브라우저 자동화</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --ground: #f3f4f7; --surface: #fff; --muted-surface: #f7f8fa; --ink: #151922;
+  --subtle: #555f70; --line: #dadee5; --blue: #1356c5; --tint: #ebf2ff;
+  --shadow: 0 12px 36px #2436550a; --success: #1d6a4e; --warning: #9a3d16;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #101216; --surface: #191d24; --muted-surface: #20252e; --ink: #f2f3f7;
+    --subtle: #aeb8c9; --line: #3c4351; --blue: #90b9ff; --tint: #26354d;
+    --shadow: 0 12px 36px #0003; --success: #91dbb5; --warning: #ffb198;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 1rem/1.55 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
+button, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.masthead { background: var(--surface); border-bottom: 1px solid var(--line); }
+.mast-inner { margin: auto; width: min(100% - 3rem, 72rem); min-height: 4.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { display: flex; align-items: center; gap: .7rem; font-size: 1.1rem; font-weight: 720; letter-spacing: -.04em; }
+.mark { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: .65rem; background: var(--blue); color: var(--surface); font-size: 1.35rem; font-weight: 650; }
+.environment { color: var(--subtle); font-size: .82rem; display: flex; align-items: center; gap: .5rem; }
+.environment::before, .run-state::before { content: ''; width: .45rem; height: .45rem; flex: none; border-radius: 50%; background: currentColor; }
+.workspace { width: min(100% - 3rem, 72rem); margin: 2rem auto 3rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 18rem); align-items: start; gap: 1.35rem; }
+.work, .inspector { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 1.45rem; box-shadow: var(--shadow); }
+.work { min-height: min(43rem, calc(100dvh - 9rem)); display: flex; flex-direction: column; }
+.log { flex: 1; padding: clamp(1.25rem, 4vw, 3rem); }
+.empty { padding-top: clamp(.5rem, 7vh, 4rem); }
+.empty h1 { margin: 0; letter-spacing: -.065em; font-weight: 740; line-height: 1.12; font-size: clamp(2.3rem, 5vw, 4.3rem); }
+.empty h1 span { display: block; }
+.empty p { margin: 1.15rem 0 2.5rem; color: var(--subtle); max-width: 29rem; }
+.examples { display: grid; gap: .4rem; max-width: 31rem; }
+.examples h2 { margin: 0 0 .3rem; color: var(--subtle); font-size: .84rem; font-weight: 650; }
+.example { min-height: 2.9rem; padding: .62rem .9rem; border-radius: .8rem; border: 1px solid var(--line); background: var(--muted-surface); color: var(--ink); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: .9rem; }
+.example::after { content: '↗'; color: var(--blue); flex: none; }
+.example:hover, .example:active { background: var(--tint); }
+.inspector { padding: 1.35rem; }
+.inspector h2 { margin: 0; font-size: 1.02rem; letter-spacing: -.022em; }
+.run-state { display: flex; gap: .48rem; align-items: center; margin: .5rem 0 1.05rem; color: var(--subtle); font-size: .84rem; }
+.run-state[data-state="running"] { color: var(--blue); }
+.run-state[data-state="done"] { color: var(--success); }
+.run-state[data-state="failed"] { color: var(--warning); }
+.current-goal { margin: 0 0 1.05rem; padding: .75rem .85rem; background: var(--muted-surface); border-radius: .65rem; font-size: .88rem; }
+.metrics { margin: 0; }
+.metrics div { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; padding: .67rem 0; border-top: 1px solid var(--line); }
+.metrics dt { color: var(--subtle); font-size: .83rem; }
+.metrics dd { margin: 0; font-size: .96rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.inspector details { border-top: 1px solid var(--line); }
+.inspector summary { color: var(--blue); min-height: 2.75rem; padding: .65rem 0 .5rem; cursor: pointer; font-size: .84rem; }
+.inspector details p { margin: .15rem 0 0; color: var(--subtle); font-size: .83rem; }
+.you { width: fit-content; max-width: 90%; margin: 0 0 1rem auto; padding: .65rem .9rem; border-radius: .95rem; background: var(--tint); white-space: pre-wrap; }
+.turn { margin-bottom: 2.3rem; }
+.turn:last-child { margin-bottom: 0; }
+.mode, .status, .meta { color: var(--subtle); font-size: .86rem; margin: 0 0 .5rem; }
+.answer { margin: .9rem 0 .45rem; font-weight: 610; white-space: pre-wrap; }
+.verification { font-size: .85rem; color: var(--subtle); margin: 0; }
+.verification.failed { color: var(--warning); }
+.meta a { color: var(--blue); min-height: 2.75rem; display: inline-flex; align-items: center; }
+ol.steps { margin: .65rem 0; padding: 0; list-style: none; }
+.step { display: grid; grid-template-columns: 1.3rem 1fr minmax(4.2rem, auto); gap: .6rem; align-items: baseline; padding: .65rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+.step .n, .step .who { color: var(--subtle); font-variant-numeric: tabular-nums; }
+.step .who { font-size: .79rem; }
+.step.llm .who { color: var(--blue); font-weight: 720; }
+.step.failed .what { color: var(--warning); }
+form { position: sticky; bottom: 0; background: var(--surface); padding: .85rem clamp(1.25rem, 4vw, 3rem) max(.85rem, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); border-radius: 0 0 1.45rem 1.45rem; }
+.bar { display: flex; align-items: end; gap: .55rem; padding: .4rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--muted-surface); }
+.bar:focus-within { border-color: var(--blue); }
+textarea { flex: 1; min-width: 0; field-sizing: content; resize: vertical; max-height: 9rem; min-height: 2.75rem; padding: .55rem .6rem; background: transparent; color: var(--ink); border: 0; }
+textarea::placeholder { color: var(--subtle); opacity: 1; }
+textarea:focus-visible { outline: none; }
+#send { flex: none; min-width: 2.75rem; min-height: 2.75rem; border: 0; border-radius: .67rem; background: var(--blue); color: var(--surface); display: grid; place-items: center; }
+#send:active { opacity: .8; }
+#send:disabled { color: var(--subtle); background: var(--line); }
+.shortcut { margin: .35rem 0 0; color: var(--subtle); font-size: .75rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 52rem) {
+  .workspace { grid-template-columns: 1fr; gap: .85rem; margin-top: .85rem; }
+  .work { min-height: auto; }
+  .inspector { grid-row: 1; padding: .8rem 1.1rem; }
+  .inspector details { display: none; }
+  .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; }
+  .metrics div { display: block; padding-bottom: .1rem; }
+  .metrics dt { font-size: .74rem; }
+  .run-state { margin-bottom: .5rem; }
+}
+@media (max-width: 34rem) {
+  .mast-inner, .workspace { width: calc(100% - 1.5rem); }
+  .workspace { margin-bottom: 1rem; }
+  .step { grid-template-columns: 1.05rem 1fr; gap: .12rem .55rem; }
+  .step .who { grid-column: 2; }
+}
+@media (prefers-contrast: more) { :root { --line: var(--subtle); } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="mast-inner">
+    <div class="brand"><span class="mark" aria-hidden="true">↗</span>브라우저 자동화</div>
+    <span class="environment" id="environment">로컬 워크스페이스</span>
+  </div>
+</header>
+<main class="workspace">
+  <section class="work" aria-label="브라우저 작업">
+    <div class="log" id="log">
+      <section class="empty" id="empty">
+        <h1><span>브라우저 작업,</span><span>한 문장으로.</span></h1>
+        <p>사이트 주소와 할 일을 적어 주세요. 실행하는 동안 어떤 모델이 각 행동을 결정했는지 볼 수 있습니다.</p>
+        <div class="examples" id="examples">
+          <h2>요청 예시</h2>
+          <button class="example" type="button">developer.mozilla.org에서 Fetch API 문서 열어줘</button>
+          <button class="example" type="button">ko.wikipedia.org에서 튜링 테스트 문서 열어줘</button>
+        </div>
+      </section>
+    </div>
+    <form id="composer">
+      <div class="bar">
+        <label class="visually-hidden" for="input">브라우저 작업 요청</label>
+        <textarea id="input" rows="1" maxlength="2000" placeholder="사이트 주소와 할 일을 입력하세요" aria-describedby="shortcut"></textarea>
+        <button id="send" type="submit" aria-label="실행" disabled></button>
+      </div>
+      <p class="shortcut" id="shortcut">Enter로 실행 · Shift + Enter로 줄바꿈</p>
+    </form>
+  </section>
+  <aside class="inspector" aria-labelledby="inspector-title">
+    <h2 id="inspector-title">현재 실행</h2>
+    <p class="run-state" id="run-state" role="status">대기 중</p>
+    <p class="current-goal" id="current-goal" hidden></p>
+    <dl class="metrics">
+      <div><dt>소형 모델 호출</dt><dd id="small-count">—</dd></div>
+      <div><dt>LLM 호출</dt><dd id="llm-count">—</dd></div>
+      <div><dt>브라우저 실행 시간</dt><dd id="elapsed">—</dd></div>
+    </dl>
+    <details open>
+      <summary>모델은 언제 바뀌나요?</summary>
+      <p id="policy">두 모델을 연결하면 소형 모델이 먼저 판단하고, 정책의 기준을 넘는 단계만 LLM에 넘깁니다.</p>
+    </details>
+  </aside>
+</main>
+<script>
+const log = document.getElementById('log')
+const input = document.getElementById('input')
+const send = document.getElementById('send')
+const composer = document.getElementById('composer')
+const state = document.getElementById('run-state')
+const goal = document.getElementById('current-goal')
+const policy = document.getElementById('policy')
+const smallCount = document.getElementById('small-count')
+const llmCount = document.getElementById('llm-count')
+const elapsed = document.getElementById('elapsed')
+const ICONS = {
+  send: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15V3M4 8l5-5 5 5"/></svg>',
+  stop: '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect width="14" height="14" rx="2.5"/></svg>',
+}
+let pending = [] // Messages of a request still waiting on an answer to the app's question.
+let controller = null
+
+// Everything from the page or the models goes in as text, never as markup.
+function add(parent, tag, className, text) {
+  const node = document.createElement(tag)
+  if (className) node.className = className
+  if (text !== undefined) node.textContent = text
+  parent.append(node)
+  return node
+}
+const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 96
+const follow = () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' })
+function setState(text, kind = '') {
+  state.textContent = text
+  state.dataset.state = kind
+}
+
+function updateCounts(event) {
+  if (event.smallCalls !== undefined) smallCount.textContent = event.smallCalls + '회'
+  if (event.llmCalls !== undefined) llmCount.textContent = event.llmCalls + '회'
+  if (event.seconds !== undefined) elapsed.textContent = event.seconds.toFixed(1) + '초'
+}
+
+function refresh() {
+  send.innerHTML = controller ? ICONS.stop : ICONS.send
+  send.setAttribute('aria-label', controller ? '중지' : '실행')
+  send.disabled = !controller && !input.value.trim()
+}
+
+function show(event, turn) {
+  if (event.type === 'ask') {
+    setState('추가 입력 필요')
+    add(turn, 'p', 'answer', event.text)
+    return
+  }
+  pending = []
+  if (event.type === 'start') {
+    goal.textContent = event.goal
+    goal.hidden = false
+    policy.textContent = event.mode
+    setState('페이지 읽는 중', 'running')
+    updateCounts({ smallCalls: 0, llmCalls: 0 })
+    turn.steps = add(turn, 'ol', 'steps')
+  } else if (event.type === 'step') {
+    updateCounts(event)
+    setState(`${event.number}단계 판단 · ${event.failed ? '행동 실패' : '진행 중'}`, 'running')
+    const row = add(turn.steps, 'li', 'step' + (event.decider === 'llm' ? ' llm' : '') + (event.failed ? ' failed' : ''))
+    add(row, 'span', 'n', event.number)
+    add(row, 'span', 'what', event.what + (event.failed ? ' (실패)' : ''))
+    add(row, 'span', 'who', (event.decider === 'llm' ? 'LLM 판단' : '소형 모델') + (event.risk !== undefined ? ` · 위험 점수 ${event.risk.toFixed(2)}` : ''))
+  } else if (event.type === 'done') {
+    updateCounts(event)
+    const labels = { done: '에이전트 완료 판단', blocked: '진행 중단', 'needs-person': '사용자 조작 필요', 'steps-exhausted': '단계 한도 도달', error: '실행 오류', stopped: '중지됨' }
+    setState(labels[event.status] ?? '실행 종료', event.status === 'done' ? 'done' : 'failed')
+    add(turn, 'p', 'answer', event.answer)
+    if (event.verified !== undefined) {
+      add(turn, 'p', 'verification' + (event.verified ? '' : ' failed'), event.verified ? '도착 페이지 채점 · 통과' : '도착 페이지 채점 · 목표 미도달')
+    }
+    const meta = add(turn, 'p', 'meta')
+    if (event.url) {
+      const link = add(meta, 'a', '', '페이지 열기')
+      link.href = event.url
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+    }
+  } else if (event.type === 'error') {
+    setState('실행 오류', 'failed')
+    add(turn, 'p', 'answer', event.text)
+  }
+}
+
+async function submit(text) {
+  document.getElementById('empty')?.remove()
+  add(log, 'p', 'you', text)
+  pending.push(text)
+  const turn = add(log, 'section', 'turn')
+  turn.setAttribute('aria-label', '실행 기록')
+  goal.hidden = true
+  smallCount.textContent = llmCount.textContent = elapsed.textContent = '—'
+  setState('요청 읽는 중', 'running')
+  input.value = ''
+  controller = new AbortController()
+  refresh()
+  follow()
+  try {
+    const response = await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: pending }), signal: controller.signal })
+    if (!response.ok) throw new Error(response.status === 409 ? '이미 진행 중인 작업이 있어요. 끝난 뒤 다시 보내 주세요.' : `요청을 처리하지 못했어요. (${response.status})`)
+    const reader = response.body.pipeThrough(new TextDecoderStream()).getReader()
+    let buffer = ''
+    let terminal = false
+    for (;;) {
+      const { value, done } = await reader.read()
+      if (done) break
+      buffer += value
+      const lines = buffer.split('\n')
+      buffer = lines.pop()
+      for (const line of lines) {
+        const followLatest = atBottom()
+        const event = JSON.parse(line)
+        show(event, turn)
+        terminal = ['ask', 'done', 'error'].includes(event.type)
+        if (followLatest) follow()
+      }
+    }
+    if (!terminal) throw new Error('결과를 받기 전에 연결이 끊겼습니다. 다시 실행해 주세요.')
+  } catch (error) {
+    setState(error.name === 'AbortError' ? '중지됨' : '실행 오류', 'failed')
+    add(turn, 'p', 'answer', error.name === 'AbortError' ? '중지했어요.' : error.message)
+    pending = []
+  } finally {
+    controller = null
+    refresh()
+    input.focus({ preventScroll: true })
+  }
+}
+
+composer.addEventListener('submit', event => {
+  event.preventDefault()
+  if (controller) { controller.abort(); return }
+  const text = input.value.trim()
+  if (text) submit(text)
+})
+input.addEventListener('input', refresh)
+input.addEventListener('keydown', event => {
+  // isComposing: Enter that finishes a Korean syllable must not send the message.
+  if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+    event.preventDefault()
+    if (!controller) composer.requestSubmit()
+  }
+})
+document.getElementById('examples').addEventListener('click', event => {
+  const button = event.target.closest('.example')
+  if (!button) return
+  input.value = button.dataset.prompt ?? button.textContent
+  refresh()
+  input.focus()
+})
+fetch('/api/config').then(response => response.json()).then(config => {
+  if (!config.demoPrompt) return
+  document.getElementById('environment').textContent = config.simulated ? '시연 · 모의 모델' : '실모델 · 모의 사이트'
+  const examples = document.getElementById('examples')
+  if (!examples) return
+  examples.querySelectorAll('button').forEach(button => button.remove())
+  const button = add(examples, 'button', 'example', '모의 사이트에서 3월 회의록 확정본 찾기')
+  button.type = 'button'
+  button.dataset.prompt = config.demoPrompt
+}).catch(() => {})
+refresh()
+</script>
+</body>
+</html>

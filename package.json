@@ -1,0 +1,25 @@
+{
+  "name": "browser-automation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx --env-file-if-exists=.env src/server.ts",
+    "demo": "tsx test/demo.ts",
+    "demo:real": "tsx --env-file-if-exists=.env test/demo.ts --real",
+    "test": "tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "experiment": "tsx --env-file-if-exists=.env experiment/run.ts",
+    "experiment:public": "tsx --env-file-if-exists=.env experiment/public-sites.ts",
+    "train": "tsx experiment/train.ts",
+    "report": "tsx --env-file-if-exists=.env experiment/report.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0",
+    "playwright": "^1.65.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,942 @@
+[
+  {
+    "condition": "small",
+    "cutoff": null,
+    "runs": 28,
+    "success": 18,
+    "successInterval": [
+      0.35714285714285715,
+      0.8571428571428571
+    ],
+    "falseDone": 1,
+    "errors": 0,
+    "stops": 0,
+    "llmCalls": 0,
+    "smallCalls": 3.9285714285714284,
+    "seconds": 7.18325,
+    "medianSeconds": 1.835,
+    "p90Seconds": 32,
+    "llmEstimatedUsd": 0,
+    "decisionEstimatedUsd": null,
+    "changedPicks": 0,
+    "singleScore": 0,
+    "byTask": [
+      {
+        "task": "final-dead-entry",
+        "trap": "the menu entry named after the goal is a dead link",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "steps-exhausted",
+            "finalPath": "/",
+            "note": "12단계 안에 끝내지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "steps-exhausted",
+            "finalPath": "/",
+            "note": "12단계 안에 끝내지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-dialog",
+        "trap": "a survey popup with a link away",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-late",
+        "trap": "results that arrive late with no sign of loading",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-load-more",
+        "trap": "the person is behind a load-more button",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-look-alike",
+        "trap": "version numbers that differ by one digit",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-misleading-link",
+        "trap": "a shortcut that lands on a maintenance page",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-plain",
+        "trap": "none: a clear path three links deep",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-wrong-section",
+        "trap": "the same file name in the shared box open first",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-box",
+        "trap": "boxes switched in place, with the same document name in each",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/doc/team-budget",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/doc/team-budget",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "inplace-filter",
+        "trap": "a year chosen in place, then a summary next to the original",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-plain",
+        "trap": "none: a tab switched in place, then the item",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-owner",
+        "trap": "the same file in a shared folder and in the person's own",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "done",
+            "finalPath": "/file/shared-quarterly"
+          }
+        ]
+      },
+      {
+        "task": "meaning-status",
+        "trap": "the goal says it in other words than the list does",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-time",
+        "trap": "a month named only relative to today",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      }
+    ],
+    "versusLlm": {
+      "tasks": 14,
+      "pairs": 28,
+      "successDelta": -0.07142857142857142,
+      "successDeltaInterval": [
+        -0.21428571428571427,
+        0
+      ],
+      "llmCallsDelta": -2.857142857142857,
+      "secondsDelta": -12.080678571428573
+    }
+  },
+  {
+    "condition": "always",
+    "cutoff": null,
+    "runs": 28,
+    "success": 20,
+    "successInterval": [
+      0.5,
+      0.9285714285714286
+    ],
+    "falseDone": 0,
+    "errors": 0,
+    "stops": 0,
+    "llmCalls": 2.857142857142857,
+    "smallCalls": 2.857142857142857,
+    "seconds": 12.022107142857143,
+    "medianSeconds": 10.833,
+    "p90Seconds": 17.335,
+    "llmEstimatedUsd": 0.002743892857142857,
+    "decisionEstimatedUsd": null,
+    "changedPicks": 13,
+    "singleScore": 0,
+    "byTask": [
+      {
+        "task": "final-dead-entry",
+        "trap": "the menu entry named after the goal is a dead link",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/booking",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/booking",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-dialog",
+        "trap": "a survey popup with a link away",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-late",
+        "trap": "results that arrive late with no sign of loading",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-load-more",
+        "trap": "the person is behind a load-more button",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-look-alike",
+        "trap": "version numbers that differ by one digit",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-misleading-link",
+        "trap": "a shortcut that lands on a maintenance page",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-plain",
+        "trap": "none: a clear path three links deep",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-wrong-section",
+        "trap": "the same file name in the shared box open first",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-box",
+        "trap": "boxes switched in place, with the same document name in each",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-filter",
+        "trap": "a year chosen in place, then a summary next to the original",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-plain",
+        "trap": "none: a tab switched in place, then the item",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-owner",
+        "trap": "the same file in a shared folder and in the person's own",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "meaning-status",
+        "trap": "the goal says it in other words than the list does",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-time",
+        "trap": "a month named only relative to today",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      }
+    ],
+    "versusLlm": {
+      "tasks": 14,
+      "pairs": 28,
+      "successDelta": 0,
+      "successDeltaInterval": [
+        0,
+        0
+      ],
+      "llmCallsDelta": 0,
+      "secondsDelta": -7.241821428571428
+    }
+  },
+  {
+    "condition": "fixed",
+    "cutoff": 0.545,
+    "runs": 28,
+    "success": 20,
+    "successInterval": [
+      0.5,
+      0.9285714285714286
+    ],
+    "falseDone": 0,
+    "errors": 0,
+    "stops": 0,
+    "llmCalls": 0.8928571428571429,
+    "smallCalls": 3.4285714285714284,
+    "seconds": 5.941714285714285,
+    "medianSeconds": 5.049,
+    "p90Seconds": 12.095,
+    "llmEstimatedUsd": 0.0012216321428571428,
+    "decisionEstimatedUsd": null,
+    "changedPicks": 7,
+    "singleScore": 0,
+    "byTask": [
+      {
+        "task": "final-dead-entry",
+        "trap": "the menu entry named after the goal is a dead link",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "steps-exhausted",
+            "finalPath": "/",
+            "note": "12단계 안에 끝내지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "steps-exhausted",
+            "finalPath": "/",
+            "note": "12단계 안에 끝내지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-dialog",
+        "trap": "a survey popup with a link away",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-late",
+        "trap": "results that arrive late with no sign of loading",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-load-more",
+        "trap": "the person is behind a load-more button",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-look-alike",
+        "trap": "version numbers that differ by one digit",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-misleading-link",
+        "trap": "a shortcut that lands on a maintenance page",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-plain",
+        "trap": "none: a clear path three links deep",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-wrong-section",
+        "trap": "the same file name in the shared box open first",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-box",
+        "trap": "boxes switched in place, with the same document name in each",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-filter",
+        "trap": "a year chosen in place, then a summary next to the original",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-plain",
+        "trap": "none: a tab switched in place, then the item",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-owner",
+        "trap": "the same file in a shared folder and in the person's own",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "meaning-status",
+        "trap": "the goal says it in other words than the list does",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-time",
+        "trap": "a month named only relative to today",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      }
+    ],
+    "versusLlm": {
+      "tasks": 14,
+      "pairs": 28,
+      "successDelta": 0,
+      "successDeltaInterval": [
+        0,
+        0
+      ],
+      "llmCallsDelta": -1.9642857142857142,
+      "secondsDelta": -13.322214285714285
+    }
+  },
+  {
+    "condition": "risk",
+    "cutoff": 0.47696441967861886,
+    "runs": 28,
+    "success": 18,
+    "successInterval": [
+      0.35714285714285715,
+      0.8571428571428571
+    ],
+    "falseDone": 0,
+    "errors": 0,
+    "stops": 0,
+    "llmCalls": 0.6428571428571429,
+    "smallCalls": 3.357142857142857,
+    "seconds": 6.6257142857142854,
+    "medianSeconds": 4.523,
+    "p90Seconds": 17.887,
+    "llmEstimatedUsd": 0.0008368464285714286,
+    "decisionEstimatedUsd": null,
+    "changedPicks": 2,
+    "singleScore": 0,
+    "byTask": [
+      {
+        "task": "final-dead-entry",
+        "trap": "the menu entry named after the goal is a dead link",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "steps-exhausted",
+            "finalPath": "/",
+            "note": "12단계 안에 끝내지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "steps-exhausted",
+            "finalPath": "/",
+            "note": "12단계 안에 끝내지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-dialog",
+        "trap": "a survey popup with a link away",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-late",
+        "trap": "results that arrive late with no sign of loading",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-load-more",
+        "trap": "the person is behind a load-more button",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-look-alike",
+        "trap": "version numbers that differ by one digit",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-misleading-link",
+        "trap": "a shortcut that lands on a maintenance page",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-plain",
+        "trap": "none: a clear path three links deep",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-wrong-section",
+        "trap": "the same file name in the shared box open first",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-box",
+        "trap": "boxes switched in place, with the same document name in each",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/doc/team-budget",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/doc/team-budget",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "inplace-filter",
+        "trap": "a year chosen in place, then a summary next to the original",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-plain",
+        "trap": "none: a tab switched in place, then the item",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-owner",
+        "trap": "the same file in a shared folder and in the person's own",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "meaning-status",
+        "trap": "the goal says it in other words than the list does",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-time",
+        "trap": "a month named only relative to today",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      }
+    ],
+    "versusLlm": {
+      "tasks": 14,
+      "pairs": 28,
+      "successDelta": -0.07142857142857142,
+      "successDeltaInterval": [
+        -0.21428571428571427,
+        0
+      ],
+      "llmCallsDelta": -2.2142857142857144,
+      "secondsDelta": -12.638214285714286
+    }
+  },
+  {
+    "condition": "llm",
+    "cutoff": null,
+    "runs": 28,
+    "success": 20,
+    "successInterval": [
+      0.5,
+      0.9285714285714286
+    ],
+    "falseDone": 0,
+    "errors": 0,
+    "stops": 0,
+    "llmCalls": 2.857142857142857,
+    "smallCalls": 0,
+    "seconds": 19.263928571428572,
+    "medianSeconds": 15.358,
+    "p90Seconds": 47.881,
+    "llmEstimatedUsd": 0.007134689285714288,
+    "decisionEstimatedUsd": 0,
+    "changedPicks": 0,
+    "singleScore": 0,
+    "byTask": [
+      {
+        "task": "final-dead-entry",
+        "trap": "the menu entry named after the goal is a dead link",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/booking",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/booking",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-dialog",
+        "trap": "a survey popup with a link away",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-late",
+        "trap": "results that arrive late with no sign of loading",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/memo",
+            "note": "\"메모 검색\"을(를) 눌러도 바뀌는 것이 없습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-load-more",
+        "trap": "the person is behind a load-more button",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-look-alike",
+        "trap": "version numbers that differ by one digit",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-misleading-link",
+        "trap": "a shortcut that lands on a maintenance page",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/maintenance",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "final-plain",
+        "trap": "none: a clear path three links deep",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "final-wrong-section",
+        "trap": "the same file name in the shared box open first",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-box",
+        "trap": "boxes switched in place, with the same document name in each",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-filter",
+        "trap": "a year chosen in place, then a summary next to the original",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "inplace-plain",
+        "trap": "none: a tab switched in place, then the item",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-owner",
+        "trap": "the same file in a shared folder and in the person's own",
+        "runs": 2,
+        "success": 0,
+        "failures": [
+          {
+            "round": 0,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          },
+          {
+            "round": 1,
+            "status": "blocked",
+            "finalPath": "/file/shared-quarterly",
+            "note": "이 페이지에서는 더 진행할 방법을 찾지 못했습니다."
+          }
+        ]
+      },
+      {
+        "task": "meaning-status",
+        "trap": "the goal says it in other words than the list does",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      },
+      {
+        "task": "meaning-time",
+        "trap": "a month named only relative to today",
+        "runs": 2,
+        "success": 2,
+        "failures": []
+      }
+    ],
+    "versusLlm": null
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "target": 0.35,
+  "validationDecisions": 195,
+  "fitting": {
+    "runs": 36,
+    "attempted": 40,
+    "decisions": 154,
+    "failedDecisions": 47,
+    "accuracy": 0.7142857142857143
+  },
+  "validation": {
+    "runs": 40,
+    "attempted": 40,
+    "failurePrevalence": 0.7692307692307693,
+    "aucRisk": 0.7985185185185185,
+    "aucMargin": 0.715925925925926,
+    "brier": 0.32223559413587755,
+    "brierPrevalence": 0.17751479289940827
+  },
+  "fixed": {
+    "threshold": 0.545,
+    "rate": 0.35384615384615387
+  },
+  "risk": {
+    "threshold": 0.47696441967861886,
+    "rate": 0.3487179487179487
+  }
+}
